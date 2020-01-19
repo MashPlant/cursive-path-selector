@@ -36,6 +36,7 @@ impl<V: View> ViewWrapper for RcView<V> {
   }
 }
 
+// `TextView` doesn't take focus, while `FocusableTextView` does
 pub struct FocusableTextView { inner: TextView }
 
 impl FocusableTextView {
@@ -50,6 +51,8 @@ impl ViewWrapper for FocusableTextView {
   fn wrap_take_focus(&mut self, _: Direction) -> bool { true }
 }
 
+// `ScrollView` scrolls to the focused location of inner view at mouse event automatically,
+// while NonAutoScrollView doesn't
 pub struct NonAutoScrollView<V> { inner: ScrollView<V> }
 
 impl<V: View> NonAutoScrollView<V> {
